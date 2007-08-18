@@ -13,7 +13,7 @@ from ZSI.generate.pyclass import pyclass_type
 
 # Locator
 class ServiceLocator:
-    ServicePortType_address = "http://www.csoft.co.uk/sendsms5"
+    ServicePortType_address = "https://www.csoft.co.uk/sendsms5"
     def getServicePortTypeAddress(self):
         return ServiceLocator.ServicePortType_address
     def getServicePortType(self, url=None, **kw):
