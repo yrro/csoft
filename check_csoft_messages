@@ -1,0 +1,68 @@
+#!/usr/bin/python
+
+# standard library
+import os
+import sys
+import signal
+
+if (not sys.stdout.isatty ()):
+    # We are being called from Nagios: install an exception handler that prints
+    # a summary of the exception to stdout and then exits with Nagios' Unknown
+    # status value.
+    def excepthook (type, value, traceback):
+        print '%s: %s' % (type, value)
+        sys.exit (3)
+    sys.excepthook = excepthook
+
+# site-packages
+import ZSI
+
+# our own modules
+from Service_services import *
+
+# timeout taken from 'plugins/common.h' in 'nagios-plugins_1.4.8.orig.tar.gz'
+DEFAULT_SOCKET_TIMEOUT = 10
+
+class Timeout (Exception):
+    pass
+
+def timeout (signal, frame):
+    raise Timeout ()
+signal.signal (signal.SIGALRM, timeout)
+
+req = AvailableMessagesRequest ()
+req.Username = os.environ['Username']
+req.PIN = os.environ['PIN']
+
+loc = ServiceLocator ()
+port1 = loc.getServicePortType ()
+
+from urlparse import urlsplit, urlunsplit
+fallback_address = list (urlsplit (loc.getServicePortTypeAddress ()))
+fallback_address[1] = 'www2.csoft.co.uk'
+fallback_address = urlunsplit (fallback_address)
+port2 = loc.getServicePortType (url = fallback_address)
+
+ports = (port1, port2)
+for port in ports:
+    signal.alarm (DEFAULT_SOCKET_TIMEOUT / len (ports))
+    try:
+        res = port.AvailableMessages (req)
+    except ZSI.FaultException, e:
+        raise
+    except Exception, e:
+        # ignore the exception unless this is the last port
+        if port != ports[-1]:
+            print >> sys.stderr, '<%s> raised %s.%s (%s); trying next port...' % (port.binding.url, e.__class__.__module__, e.__class__.__name__, e)
+            continue
+        raise
+    
+    print '%i messages remaining' % (res.Messages)
+    if res.Messages < 15:
+        sys.exit (2)
+    elif res.Messages < 30:
+        sys.exit (1)
+    else:
+        sys.exit (0)
+    
+raise Exception ("Reached end of script which shouldn't happen")
