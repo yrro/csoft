@@ -24,6 +24,18 @@ class ServiceSOAP:
     def __init__(self, url, **kw):
         kw.setdefault("readerclass", None)
         kw.setdefault("writerclass", None)
+
+        from M2Crypto.httpslib import HTTPSConnection
+        kw.setdefault('transport', HTTPSConnection)
+
+        # lifted from <http://localhost/doc/python-m2crypto/howto.ssl.html>
+        from M2Crypto import SSL
+        ctx = SSL.Context ()
+        ctx.set_verify (SSL.verify_peer, depth=5)
+        if ctx.load_verify_locations('/etc/ssl/certs/ca-certificates.crt') != 1:
+            raise Exception ('Unable to load CA Certificates')
+        kw.setdefault('transdict', {'ssl_context': ctx})
+
         # no resource properties
         self.binding = client.Binding(url=url, **kw)
         # no ws-addressing
