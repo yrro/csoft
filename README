@@ -1,0 +1,65 @@
+csoft - send SMS messages with csoft.co.uk
+==========================================
+Sam Morris <sam@robots.org.uk>
+
+'csoft' is a Python package that interfaces with the
+http://en.wikipedia.org/wiki/SMS[Short Message Service] (SMS) delivery service
+provided by http://www.csoft.co.uk/[Connection Software].
+
+Two executable scripts are included:
+
+ * `csoft-sms`, which sends a message to the phone number provided as the first
+    command-line argument.
+
+ * `check_csoft_messages`, a http://www.nagios.org/[Nagios] plugin that
+    monitors the number of messages left in your account.
+
+The scripts look for your username and PIN in the `Username` and `PIN`
+environment variables.
+
+Downloads
+---------
+Releases of 'csoft' can be downloaded from
+http://robots.org.uk/src/csoft/releases/[].
+
+Requirements
+------------
+ * http://www.python.org/[Python]. I develop and run with version 2.4, but
+   earlier versions should also work.
+
+ * http://pywebsvcs.sourceforge.net/[Zolera SOAP Infrastructure] (ZSI) package.
+
+ * http://chandlerproject.org/bin/view/Projects/MeTooCrypto[M2Crypto] package.
+
+Bugs and Limitations
+--------------------
+The scripts are basically functional but need polishing, which I will do before
+the initial (0.1) release.
+
+Contributing
+------------
+If you find this tool useful or have any other comments, ideas for improvements
+or even patches, please let me know: send email to mailto:sam@robots.org.uk[Sam
+Morris].
+
+I use the http://git.or.cz/[Git] version control system to manage the source
+code of 'csoft'. You can fetch a copy of the repository with the
+following command:
+
+ git-clone http://robots.org.uk/src/csoft/csoft.git
+
+Copyright, License and Warranty
+-------------------------------
+(C) 2007 Sam Morris <sam@robots.org.uk>
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) any later
+version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with
+this program.  If not, see http://www.gnu.org/licenses/[].
