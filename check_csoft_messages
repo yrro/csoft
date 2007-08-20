@@ -57,7 +57,7 @@ for port in ports:
             continue
         raise
     
-    print '%i messages remaining' % (res.Messages)
+    print '%i messages remaining' % (int (res.Messages))
     if res.Messages < 15:
         sys.exit (2)
     elif res.Messages < 30:
