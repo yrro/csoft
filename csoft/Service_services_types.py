@@ -72,7 +72,7 @@ class ns0:
         type = (schema, "SmartMessage")
         def __init__(self, pname, ofwhat=(), attributes=None, extend=False, restrict=False, **kw):
             ns = ns0.SmartMessage_Def.schema
-            TClist = [ZSI.TCnumbers.IpositiveInteger(pname="LibraryNumber", aname="_LibraryNumber", minOccurs=0, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded")), ZSI.TC.HexBinaryString(pname="Data", aname="_Data", minOccurs=0, maxOccurs=1, nillable=True, typed=False, encoded=kw.get("encoded")), GTD("http://www.csoft.co.uk/dtd/sendsms5.xsd","DataFormat",lazy=False)(pname="Format", aname="_Format", minOccurs=0, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded"))]
+            TClist = [ZSI.TCnumbers.InonNegativeInteger(pname="LibraryNumber", aname="_LibraryNumber", minOccurs=0, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded")), ZSI.TC.HexBinaryString(pname="Data", aname="_Data", minOccurs=0, maxOccurs=1, nillable=True, typed=False, encoded=kw.get("encoded")), GTD("http://www.csoft.co.uk/dtd/sendsms5.xsd","DataFormat",lazy=False)(pname="Format", aname="_Format", minOccurs=0, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded"))]
             self.attribute_typecode_dict = attributes or {}
             if extend: TClist += ofwhat
             if restrict: TClist = ofwhat
@@ -117,7 +117,7 @@ class ns0:
         type = (schema, "MMSLibraryNumber")
         def __init__(self, pname, ofwhat=(), attributes=None, extend=False, restrict=False, **kw):
             ns = ns0.MMSLibraryNumber_Def.schema
-            TClist = [ZSI.TCnumbers.IpositiveInteger(pname="LibraryNumber", aname="_LibraryNumber", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded")), ZSI.TC.String(pname="TextMessage", aname="_TextMessage", minOccurs=0, maxOccurs=1, nillable=True, typed=False, encoded=kw.get("encoded"))]
+            TClist = [ZSI.TCnumbers.InonNegativeInteger(pname="LibraryNumber", aname="_LibraryNumber", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded")), ZSI.TC.String(pname="TextMessage", aname="_TextMessage", minOccurs=0, maxOccurs=1, nillable=True, typed=False, encoded=kw.get("encoded"))]
             self.attribute_typecode_dict = attributes or {}
             if extend: TClist += ofwhat
             if restrict: TClist = ofwhat
@@ -249,7 +249,7 @@ class ns0:
         type = (schema, "SimplePush")
         def __init__(self, pname, ofwhat=(), attributes=None, extend=False, restrict=False, **kw):
             ns = ns0.SimplePush_Def.schema
-            TClist = [ZSI.TCnumbers.IpositiveInteger(pname="LibraryNumber", aname="_LibraryNumber", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded")), ZSI.TC.String(pname="TextMessage", aname="_TextMessage", minOccurs=0, maxOccurs=1, nillable=True, typed=False, encoded=kw.get("encoded"))]
+            TClist = [ZSI.TCnumbers.InonNegativeInteger(pname="LibraryNumber", aname="_LibraryNumber", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded")), ZSI.TC.String(pname="TextMessage", aname="_TextMessage", minOccurs=0, maxOccurs=1, nillable=True, typed=False, encoded=kw.get("encoded"))]
             self.attribute_typecode_dict = attributes or {}
             if extend: TClist += ofwhat
             if restrict: TClist = ofwhat
@@ -465,7 +465,7 @@ class ns0:
         schema = "http://www.csoft.co.uk/dtd/sendsms5.xsd"
         def __init__(self, **kw):
             ns = ns0.SubmitMessageResponse_Dec.schema
-            TClist = [ZSI.TC.String(pname="MessageIdentifier", aname="_MessageIdentifier", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded")), ZSI.TC.String(pname="Report", aname="_Report", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded")), ZSI.TC.String(pname="Text", aname="_Text", minOccurs=0, maxOccurs=1, nillable=True, typed=False, encoded=kw.get("encoded")), ZSI.TCnumbers.IpositiveInteger(pname="LibraryNumber", aname="_LibraryNumber", minOccurs=0, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded")), GTD("http://www.csoft.co.uk/dtd/sendsms5.xsd","Reserved",lazy=False)(pname="Reserved", aname="_Reserved", minOccurs=0, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded"))]
+            TClist = [ZSI.TC.String(pname="MessageIdentifier", aname="_MessageIdentifier", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded")), ZSI.TC.String(pname="Report", aname="_Report", minOccurs=1, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded")), ZSI.TC.String(pname="Text", aname="_Text", minOccurs=0, maxOccurs=1, nillable=True, typed=False, encoded=kw.get("encoded")), ZSI.TCnumbers.InonNegativeInteger(pname="LibraryNumber", aname="_LibraryNumber", minOccurs=0, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded")), GTD("http://www.csoft.co.uk/dtd/sendsms5.xsd","Reserved",lazy=False)(pname="Reserved", aname="_Reserved", minOccurs=0, maxOccurs=1, nillable=False, typed=False, encoded=kw.get("encoded"))]
             kw["pname"] = ("http://www.csoft.co.uk/dtd/sendsms5.xsd","SubmitMessageResponse")
             kw["aname"] = "_SubmitMessageResponse"
             self.attribute_typecode_dict = {}
