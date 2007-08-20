@@ -1,0 +1,50 @@
+#!/usr/bin/python
+
+# standard library
+import os
+import sys
+
+# site-packages
+import ZSI
+
+# our own modules
+from csoft.Service_services import *
+
+req = SubmitMessageRequest ()
+
+req.Username = os.environ['Username']
+req.PIN = os.environ['PIN']
+
+req.Recipient = req.new_Recipient ()
+req.Recipient.SendTo = sys.argv[1]
+
+req.Message = req.new_Message ()
+req.Message.TextMessage = sys.stdin.read ()
+
+loc = ServiceLocator ()
+port1 = loc.getServicePortType ()
+
+from urlparse import urlsplit, urlunsplit
+fallback_address = list (urlsplit (loc.getServicePortTypeAddress ()))
+fallback_address[1] = 'www2.csoft.co.uk'
+fallback_address = urlunsplit (fallback_address)
+port2 = loc.getServicePortType (url = fallback_address)
+
+ports = (port1, port2)
+for port in ports:
+    try:
+        res = port.SubmitMessage (req)
+    except ZSI.FaultException, e:
+        raise
+    except Exception, e:
+        # ignore the exception unless this is the last port
+        if port == ports[-1]:
+            raise
+        
+        print >> sys.stderr, '<%s> raised %s.%s (%s); trying next port...' % (port.binding.url, e.__class__.__module__, e.__class__.__name__, e)
+        continue
+    break
+
+report = int (res.Report)
+if report not in (-3, -2, 0, 98, 99):
+    raise Exception ('Sending failed: %i (%s)' % (report, res.Text))

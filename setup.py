@@ -10,4 +10,4 @@ setup (name = 'csoft',
        url = 'http://robots.org.uk/src/csoft/',
 
        packages = ('csoft',),
-       scripts = ('check_csoft_messages',))
+       scripts = ('check_csoft_messages', 'csoft-sms'))
