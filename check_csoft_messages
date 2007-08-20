@@ -14,9 +14,6 @@ if (not sys.stdout.isatty ()):
         sys.exit (3)
     sys.excepthook = excepthook
 
-# site-packages
-import ZSI
-
 # our own modules
 from csoft.Service_services import *
 
@@ -48,8 +45,6 @@ for port in ports:
     signal.alarm (DEFAULT_SOCKET_TIMEOUT / len (ports))
     try:
         res = port.AvailableMessages (req)
-    except ZSI.FaultException, e:
-        raise
     except Exception, e:
         # ignore the exception unless this is the last port
         if port != ports[-1]:
